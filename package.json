@@ -1,0 +1,103 @@
+{
+  "name": "crawless",
+  "version": "0.1.0",
+  "description": "crawless application",
+  "author": "Benedict Kpaduwa",
+  "build": {
+    "appId": "crawless.menu"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "private": true,
+  "dependencies": {
+    "@codemirror/commands": "^6.1.2",
+    "@codemirror/lang-markdown": "^6.0.5",
+    "@codemirror/language": "^6.3.1",
+    "@codemirror/language-data": "^6.1.0",
+    "@codemirror/state": "^6.1.4",
+    "@codemirror/theme-one-dark": "^6.1.0",
+    "@codemirror/view": "^6.5.1",
+    "@crawless/ui": "^1.0.228",
+    "@electron/build-tools": "^1.1.0",
+    "@lezer/highlight": "^1.1.2",
+    "@monaco-editor/react": "^4.4.6",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@tanstack/react-query": "^4.14.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@uiw/codemirror-theme-vscode": "^4.15.1",
+    "@uiw/codemirror-themes": "^4.15.1",
+    "@uiw/codemirror-themes-all": "^4.15.1",
+    "@uiw/react-codemirror": "^4.15.1",
+    "ace-builds": "^1.12.3",
+    "axios": "^1.2.0",
+    "codemirror": "^6.0.1",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "match-sorter": "^6.3.1",
+    "monaco-editor-webpack-plugin": "^7.0.1",
+    "perfect-scrollbar": "^1.5.5",
+    "ps-tree": "^1.2.0",
+    "pstree": "^0.1.0",
+    "rc-animate": "^3.1.1",
+    "rc-dropdown": "^4.0.1",
+    "rc-tooltip": "^5.2.2",
+    "react": "^18.2.0",
+    "react-ace": "^10.1.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
+    "react-monaco-editor": "^0.50.1",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-redux": "^8.0.4",
+    "react-resize-detector": "^7.1.2",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
+    "react-split": "^2.0.14",
+    "react-toastify": "^9.1.1",
+    "sort-by": "^1.2.0",
+    "split.js": "^1.6.5",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start-react": "react-scripts start",
+    "build-react": "react-scripts build",
+    "test-react": "react-scripts test --env=jsdom",
+    "eject-react": "react-scripts eject",
+    "build-electron": "electron-builder",
+    "build": "yarn build-react && yarn build-electron -wml",
+    "start": "concurrently \"cross-env BROWSER=none npm run start-react\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.12",
+    "concurrently": "^7.4.0",
+    "electron": "^20.1.3",
+    "electron-builder": "^23.5.1",
+    "postcss": "^8.4.18",
+    "tailwind-scrollbar": "^2.0.1",
+    "tailwindcss": "^3.1.8",
+    "wait-on": "^6.0.1"
+  }
+}
