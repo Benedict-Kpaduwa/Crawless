@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu, ipcMain, dialog} = require("electron");
+const {app, BrowserWindow, Menu, ipcMain, dialog, screen} = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 var fs = require('fs')
@@ -8,9 +8,11 @@ const psTree = require('ps-tree');
 let mainWindow;
 var child;
 function createWindow() {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     mainWindow = new BrowserWindow({ 
-        width: 1200, 
-        height: 800,
+        width, 
+        height,
+        //fullscreen: true,
         icon: '../../Assets/crawless.png',
         backgroundColor: '#151515',
         title: 'Crawless',

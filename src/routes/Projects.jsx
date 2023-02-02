@@ -36,7 +36,7 @@ const Projects = () => {
   // }
   
   return (
-    <div className='flex flex-row w-full'>
+    <div className='flex'>
       <div className='absolute left-[52px] top-0 h-full w-[240px]'>
       <div className="text-gray-900 leading-[16px] m-0 bg-[#1C1C23] border-l-0 border-r-2 border-r-gray-900 border-l-2 border-l-gray-900 font-normal font-semibold w-[240px] min-w-[196px] max-w-[512px] flex flex-1 flex-col h-screen" style={{padding: 8}}>
         {/* <div className='cursor-pointer text-gray-100 text-xl' onClick={()=>{}}>+</div>

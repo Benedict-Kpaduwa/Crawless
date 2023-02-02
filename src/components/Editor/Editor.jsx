@@ -61,8 +61,12 @@ const Editor = () => {
     });
   }
 
+  // function onChange(e){
+  //   setCode(e.target.value)
+  // }
+
   return (
-    <div className='w-[989px] bg-[#151515]'>
+    <div className='w-full bg-[#151515]'>
       <Panel/>
       <div className='fixed left-[294px] top-[72px] h-full flex flex-row'>
         <Control compile={compile} code={code}/>
