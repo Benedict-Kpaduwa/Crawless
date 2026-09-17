@@ -47,23 +47,15 @@ const Editor = () => {
     // to run the compiler program
     exec(`node -e "${jscode}"`, function(err, stdout, stderr) {
       if(err){
-        console.log(`Error: ${err}`)
-        // setErrorMessage(err)
         return
       }
       if(stderr){
-        console.log(`Error: ${stderr}`)
         setStderrMessage(stderr)
         return;
       }
       setCompiledCode(stdout)
-      console.log(stdout);
     });
   }
-
-  // function onChange(e){
-  //   setCode(e.target.value)
-  // }
 
   return (
     <div className='w-full bg-[#151515]'>

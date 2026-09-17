@@ -6,7 +6,6 @@ const CreateWorkflow = () => {
     const [lastRan, setLastRan] = useState('')
     const [codejs, setCodeJs] = useState('')
     const [isRunning, setIsRunning] = useState(false)
-    //const [options, setOptions] = useState('')
 
   return (
     <form>

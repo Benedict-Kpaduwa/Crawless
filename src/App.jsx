@@ -2,7 +2,6 @@ import React from 'react';
 import {Outlet, Route, Routes} from "react-router-dom";  
 import NavBar from './routes/NavBar';
 import Home from './routes/Home'
-//import ErrorPage from './routes/ErrorPage';
 import { StoreConsumer } from "./contexts/store";
 import Projects from './routes/Projects';
 import Documentation from './routes/Documentation';

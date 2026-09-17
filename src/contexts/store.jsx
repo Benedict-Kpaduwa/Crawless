@@ -6,8 +6,6 @@ export const StoreProvider = ({ children }) => {
   const [tab, setTab] = useState("");
   const [openTabs, setOpenTabs] = useState([]);
   const [workFlow, setWorkflow] = useState([])
-
-  // Not important Just for styling
   const [showSidebar, setShowSidebar] = useState(true);
 
   return (

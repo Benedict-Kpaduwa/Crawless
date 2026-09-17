@@ -15,32 +15,14 @@ const Projects = () => {
   }, [])
 
   const task = workflows.tasks
-  console.log(workflows)
-  
-  // function newProject(){
-  //   console.log("New Project")
-  // }
-  // function handleSearch(){
-  //   console.log("Searching Clicked")
-  // }
-  
+
   const getFileNames = () => task?.map(({ name }) => name);
   const files = getFileNames();
-  
-  
-  // const handleSelect = (file) =>{
-  //   setTab(file)
-  //   if(!openTabs.includes(file)){
-  //     setOpenTabs((currentOpenTabs)=> [...currentOpenTabs, file])
-  //   }
-  // }
-  
+
   return (
     <div className='flex'>
       <div className='absolute left-[52px] top-0 h-full w-[240px]'>
       <div className="text-gray-900 leading-[16px] m-0 bg-[#1C1C23] border-l-0 border-r-2 border-r-gray-900 border-l-2 border-l-gray-900 font-normal font-semibold w-[240px] min-w-[196px] max-w-[512px] flex flex-1 flex-col h-screen" style={{padding: 8}}>
-        {/* <div className='cursor-pointer text-gray-100 text-xl' onClick={()=>{}}>+</div>
-        <CreateWorkflow/> */}
         <div className='h-[66px] w-full '>
           <div className='w-full h-[32px] bg-[#25252E]'>
             <div className='h-[24px] m-[4px] absolute left-[4px] right-[4px] top-[4px]'>
