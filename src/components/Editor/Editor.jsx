@@ -2,8 +2,6 @@ import React,{useEffect, useState} from 'react'
 import Split from 'react-split';
 import { useParams } from "react-router-dom";
 import { useStore } from "../../contexts/store";
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchWorkflow} from '../../redux/features/workflowSlice'
 import CodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import "react-toastify/dist/ReactToastify.css"
@@ -11,18 +9,15 @@ import Panel from '../Panel/Panel';
 import {atomone} from '@uiw/codemirror-themes-all'
 import './Editor.css'
 import Control from '../Control/Control';
-import Browser from '../Browser/Browser';
-const { exec } = window.require('child_process');
+import Logs from '../Logs/Logs';
 
 const Editor = () => {
-  const {workflows} = useSelector(state => state.workflow)
-  const dispatch = useDispatch();
   const { openTabs, setOpenTabs, setTab, tab } = useStore();
   const { name } = useParams();
 
-  useEffect(() => {
-    dispatch(fetchWorkflow())
-  },[])
+  const [code, setCode] = useState('')
+  const [logs, setLogs] = useState([])
+  const [runId, setRunId] = useState(null)
 
   useEffect(() => {
     if (name && openTabs) {
@@ -35,46 +30,51 @@ const Editor = () => {
     }
   }, [name, openTabs]);
 
-  const task = workflows.tasks
-  const getFileContent = (name) =>task?.find((item) => item.name === name)?.code
-  const contents = getFileContent(name)
-  const [compiledCode, setCompiledCode] = useState(''); 
-  const [code, setCode] = useState(contents)
-  const [stderrMessage, setStderrMessage] = useState('')
+  useEffect(() => {
+    if (!window.crawless || !name) return
+    window.crawless.listWorkflows().then((workflows) => {
+      const workflow = workflows.find((w) => w.name === name)
+      setCode(workflow?.code_js || '')
+    })
+  }, [name])
 
-  function compile(jscode) {
-    // Use the `exec` method to execute a command
-    // to run the compiler program
-    exec(`node -e "${jscode}"`, function(err, stdout, stderr) {
-      if(err){
-        return
-      }
-      if(stderr){
-        setStderrMessage(stderr)
-        return;
-      }
-      setCompiledCode(stdout)
-    });
+  useEffect(() => {
+    if (!window.crawless) return
+    return window.crawless.onLog((payload) => {
+      if (payload.runId !== runId) return
+      setLogs((current) => [...current, payload])
+    })
+  }, [runId])
+
+  async function run(jscode) {
+    if (!window.crawless) return
+    await window.crawless.updateWorkflow(name, { code_js: jscode })
+    setLogs([])
+    const id = await window.crawless.runWorkflow(name, jscode, {})
+    setRunId(id)
+  }
+
+  async function stop() {
+    if (!window.crawless || !runId) return
+    await window.crawless.stopWorkflow(runId)
+    setRunId(null)
   }
 
   return (
     <div className='w-full bg-[#151515]'>
       <Panel/>
       <div className='fixed left-[294px] top-[72px] h-full flex flex-row'>
-        <Control compile={compile} code={code}/>
+        <Control onRun={() => run(code)} onStop={stop} isRunning={!!runId}/>
         <Split direction='horizontal' style={{height: 'calc(100vh - 4rem'}}>
-          <CodeMirror 
-            value={contents}
-            extensions={[javascript({ jsx: true })]} 
+          <CodeMirror
+            value={code}
+            extensions={[javascript({ jsx: true })]}
             theme={atomone}
-            onChange={(editor, data, value) => {
-              setCode(value);
-              compile(value);
-            }}
+            onChange={(value) => setCode(value)}
             height='100vh'
             width='756px'
           />
-          <Browser compiledCode={compiledCode} stderrMessage={stderrMessage}/>
+          <Logs logs={logs}/>
         </Split>
       </div>
     </div>

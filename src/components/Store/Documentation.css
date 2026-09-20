@@ -1,0 +1,14 @@
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    font-weight: 600;
+    color: #ECECEC;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+.markdown-body h1 { font-size: 20px; }
+.markdown-body h2 { font-size: 16px; }
+.markdown-body h3 { font-size: 14px; }
+.markdown-body p { margin-bottom: 0.75em; line-height: 1.5; }
+.markdown-body ul, .markdown-body ol { margin-left: 1.25em; margin-bottom: 0.75em; }
+.markdown-body code { background: #151515; padding: 2px 4px; border-radius: 4px; }
+.markdown-body pre { background: #151515; padding: 8px; border-radius: 4px; overflow-x: auto; }
+.markdown-body a { color: #887DFF; text-decoration: underline; }

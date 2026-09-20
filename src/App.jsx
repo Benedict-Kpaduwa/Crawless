@@ -14,7 +14,7 @@ import EmptyContainer from './components/Empty';
 export default function App(){
   return(
     <StoreConsumer>
-      {(data)=>(
+      {()=>(
         <div>
           <Tabs/>
           <div>

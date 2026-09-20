@@ -3,16 +3,16 @@ import {Svg} from '@crawless/ui'
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.css';
 
-const Control = ({compile, code}) => {
+const Control = ({onRun, onStop, isRunning}) => {
   return (
     <div className='h-[100vh] w-[40px] bg-[#2f2f3d]'>
       <div className='flex flex-col items-center p-0 w-full h-[242px]'>
         <div className='flex flex-col items-center p-0 w-[40px] h-[82px]'>
           <div className='flex flex-col items-center p-[12px] w-[40px] h-[40px] bg-[#1c1c23] cursor-pointer'>
-            <Svg.Run className='w-[16px] h-[16px] fill-[#A9EF7B]' onClick={()=>compile(code)}/>
+            <Svg.Run className={`w-[16px] h-[16px] ${isRunning ? 'fill-[#464753]' : 'fill-[#A9EF7B]'}`} onClick={isRunning ? undefined : onRun}/>
           </div>
           <div className='h-[40px] w-[40px] flex flex-col items-center p-[12px] bg-[#1c1c23] cursor-pointer'>
-            <Svg.Stop className='w-[16px] h-[16px] fill-[#464753]'/>
+            <Svg.Stop className={`w-[16px] h-[16px] ${isRunning ? 'fill-[#F87171]' : 'fill-[#464753]'}`} onClick={isRunning ? onStop : undefined}/>
           </div>
         </div>
         <div className='w-[40px] h-[40px] flex flex-row items-center p-0 cursor-pointer'>

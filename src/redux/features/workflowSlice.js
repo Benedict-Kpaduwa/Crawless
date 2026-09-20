@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchWorkflow = createAsyncThunk('workflow/fetchWorkflow', async ()=>{
-    return fetch("https://api.stage.crawless.com/store/workflow/statista").then((res)=> res.json())
+// This is the Store's remote catalog entry (api.stage.crawless.com), not the
+// user's own local workflows — those are persisted locally, see Projects.jsx.
+export const fetchWorkflow = createAsyncThunk('workflow/fetchWorkflow', async (version = '0.0.2')=>{
+    return fetch(`https://api.stage.crawless.com/store/workflow/statista?version=${version}`).then((res)=> res.json())
 })
 
 export const workflowSlice = createSlice({
@@ -12,15 +14,16 @@ export const workflowSlice = createSlice({
         error: false
     },
     extraReducers: {
-        [fetchWorkflow.pending]:(state, action)=>{
+        [fetchWorkflow.pending]:(state)=>{
             state.loading = true
         },
         [fetchWorkflow.fulfilled]:(state, action)=>{
             state.loading = false
             state.workflows = action.payload
         },
-        [fetchWorkflow.rejected]:(state, action)=>{
+        [fetchWorkflow.rejected]:(state)=>{
             state.loading = false
+            state.error = true
         }
     }
 })
